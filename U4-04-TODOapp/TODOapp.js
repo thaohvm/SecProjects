@@ -2,9 +2,7 @@ const form = document.querySelector('#taskform');
 const taskInput = document.querySelector('input[name=newtask');
 const taskList = document.querySelector('#task-list');
 
-
-
-function updateData(data) {
+function updateData() {
     let data = [];
     let todos = document.getElementsByTagName('li');
     for (let i = 0; i < todos.length; i++) {
@@ -17,6 +15,7 @@ function updateData(data) {
     }
     localStorage.setItem('data', JSON.stringify(data));
 }
+JSON.parse(localStorage.getItem('data'));
 
 taskList.addEventListener('click', function(e) {
     if (e.target.tagName === "BUTTON") {
@@ -25,6 +24,7 @@ taskList.addEventListener('click', function(e) {
     else if (e.target.tagName == "LI") {
         e.target.style.textDecoration = 'line-through';
     }
+    updateData();
 });
 
 form.addEventListener('submit', function(e) {
@@ -37,6 +37,7 @@ form.addEventListener('submit', function(e) {
     newTask.appendChild(removeBtn);
     taskList.appendChild(newTask);
     taskInput.value = '';
+    updateData();
 })
 
 // localStorage.setItem("task-list", JSON.stringify(taskList));
