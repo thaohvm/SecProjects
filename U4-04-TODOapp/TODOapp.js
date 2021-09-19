@@ -1,6 +1,23 @@
 const form = document.querySelector('#taskform');
-const taskInput = document.querySelector('input[name=newtask');
+const taskInput = document.querySelector('input[name=newtask]');
 const taskList = document.querySelector('#task-list');
+
+let storage = localStorage.getItem('data');
+let data = JSON.parse(storage);
+console.log(data);
+
+if (storage !== null) {
+    for (var i = 0; i < data.length; i++) {
+        const newTask = document.createElement('li');
+        const removeBtn = document.createElement('button');
+        removeBtn.innerText = "Remove";
+
+        newTask.innerText = data[i].todoText;
+        newTask.style.textDecoration = data[i].todoStyle;
+        newTask.appendChild(removeBtn);
+        taskList.appendChild(newTask);
+    }
+}
 
 function updateData() {
     let data = [];
@@ -15,7 +32,6 @@ function updateData() {
     }
     localStorage.setItem('data', JSON.stringify(data));
 }
-JSON.parse(localStorage.getItem('data'));
 
 taskList.addEventListener('click', function(e) {
     if (e.target.tagName === "BUTTON") {
