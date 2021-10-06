@@ -16,7 +16,8 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 
  function makeBoard() {
   for (let y = 0; y < HEIGHT; y++) {
-    board.push(Array.from({ length: WIDTH }));
+    // board.push(new Array(WIDTH));
+    board.push(Array.from({ length: WIDTH }))
   }
 }
 
