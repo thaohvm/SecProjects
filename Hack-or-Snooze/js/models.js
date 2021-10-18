@@ -202,4 +202,18 @@ class User {
       return null;
     }
   }
+
+  async addFavorite(storyId) {
+    const res = await axios.post(
+			`${BASE_URL}/users/${this.username}/favorites/${storyId}`,
+			{ token: this.loginToken }
+		);
+  }
+
+  async removeFavorite(storyId) {
+    const res = await axios.delete(
+			`${BASE_URL}/users/${this.username}/favorites/${storyId}`,
+			{ data: { token: this.loginToken } }
+		);
+  }
 }
