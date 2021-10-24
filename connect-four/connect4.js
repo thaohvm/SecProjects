@@ -8,7 +8,7 @@ const WIDTH = 7;
 const HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
-let board = []; // array of rows, each row is array of cells  (board[y][x])
+let board = []; // array of rows, each row is array of cells  (board[y][x]) - 2 dimentional array
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -24,10 +24,8 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   const htmlBoard = document.getElementById('board');
 
-  // TODO: add comment for this code
   // create the top line of the board and and event listener for this area so user can click on to place their pot
   var top = document.createElement("tr");
   top.setAttribute("id", "column-top");
@@ -40,7 +38,6 @@ function makeHtmlBoard() {
   }
   htmlBoard.append(top);
 
-  // TODO: add comment for this code
   // create the main board
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
@@ -84,7 +81,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+
   alert(`Player ${currPlayer} won`);
 }
 
@@ -136,8 +133,6 @@ function checkForWin() {
     );
   }
 
-  // TODO: read and understand this code. Add comments to help you.
-
   for (var y = 0; y < HEIGHT; y++) {
     for (var x = 0; x < WIDTH; x++) {
       var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
@@ -154,3 +149,7 @@ function checkForWin() {
 
 makeBoard();
 makeHtmlBoard();
+
+document.querySelector('#btn-restart').addEventListener('click', function () {
+	location.reload();
+});
