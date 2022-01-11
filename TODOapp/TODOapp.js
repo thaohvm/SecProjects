@@ -55,6 +55,3 @@ form.addEventListener('submit', function(e) {
     taskInput.value = '';
     updateData();
 })
-
-// localStorage.setItem("task-list", JSON.stringify(taskList));
-// JSON.parse(localStorage.getItem("task-list"))

@@ -8,7 +8,7 @@
 import os
 from unittest import TestCase
 
-from models import db, User, Message, Follows, Likes
+from models import db, User, Message, Follows
 
 # BEFORE we import our app, let's set an environmental variable
 # to use a different database for tests (we need to do this
@@ -56,22 +56,3 @@ class UserModelTestCase(TestCase):
         # User should have no messages & no followers
         self.assertEqual(len(u.messages), 0)
         self.assertEqual(len(u.followers), 0)
-
-    def test_is_following(self):
-        """Test if user is following/followed by other"""
-        u = User(
-            email="a@a.com",
-            username="student",
-            password="aaaaaa"
-        )
-        u2 = User(
-            email="a2@a.com",
-            username="student2",
-            password="aaaaaa"
-        )
-        db.session.add_all([u, u2])
-        db.session.commit()
-
-        u2.following.append(u)
-        self.assertEqual(u2.is_following(u), 1)
-        self.assertEqual(u.is_followed_by(u2), 1)
