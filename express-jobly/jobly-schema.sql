@@ -1,4 +1,4 @@
-CREATE TABLE companies (
+CREATE TABLE IF NOT EXISTS companies (
   handle VARCHAR(25) PRIMARY KEY CHECK (handle = lower(handle)),
   name TEXT UNIQUE NOT NULL,
   num_employees INTEGER CHECK (num_employees >= 0),
@@ -6,7 +6,7 @@ CREATE TABLE companies (
   logo_url TEXT
 );
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   username VARCHAR(25) PRIMARY KEY,
   password TEXT NOT NULL,
   first_name TEXT NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE users (
   is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE jobs (
+CREATE TABLE IF NOT EXISTS jobs (
   id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
   salary INTEGER CHECK (salary >= 0),
@@ -25,7 +25,7 @@ CREATE TABLE jobs (
     REFERENCES companies ON DELETE CASCADE
 );
 
-CREATE TABLE applications (
+CREATE TABLE IF NOT EXISTS applications (
   username VARCHAR(25)
     REFERENCES users ON DELETE CASCADE,
   job_id INTEGER

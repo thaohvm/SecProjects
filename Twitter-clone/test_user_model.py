@@ -96,4 +96,4 @@ class UserModelTestCase(TestCase):
     def test_repr(self):
         """Does repr work?"""
 
-        self.assertEqual(repr(self.u1), '<User #1111: testuser1, email1@test.com>')
+        self.assertEqual(repr(self.u1), '<User #1111: test1, email1@email.com>')

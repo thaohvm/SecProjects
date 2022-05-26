@@ -6,6 +6,7 @@ const { BCRYPT_WORK_FACTOR } = require("../config");
 const testJobIds = [];
 
 async function commonBeforeAll() {
+  console.log("inside commonBeforeAll")
   // noinspection SqlWithoutWhere
   await db.query("DELETE FROM companies");
   // noinspection SqlWithoutWhere
@@ -47,15 +48,22 @@ async function commonBeforeAll() {
 }
 
 async function commonBeforeEach() {
-  await db.query("BEGIN");
+  console.log("INSIDE commonBeforeEach")
+    await db.query("BEGIN");
 }
 
 async function commonAfterEach() {
+  console.log("INSIDE commonAfterEach")
   await db.query("ROLLBACK");
 }
 
 async function commonAfterAll() {
+  console.log("INSIDE commonAfterEach")
+  await db.query("DELETE FROM companies");
+  // noinspection SqlWithoutWhere
+  await db.query("DELETE FROM users");
   await db.end();
+
 }
 
 
