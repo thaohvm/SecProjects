@@ -5,6 +5,9 @@ import NavBar from './NavBar';
 import Home from './Home';
 import Login from './users/Login';
 import SignUp from './users/SignUp';
+import Routes from './routes/Routes';
+import CompanyList from './company/CompanyList';
+
 
 class App extends Component {
   render() {
@@ -14,15 +17,7 @@ class App extends Component {
           <NavBar />
           <main>
             <Switch>
-              <Route exact path="/"
-                render={() => <Home />}
-              />
-              <Route exact path="/login"
-                render={() => <Login />}
-              />
-              <Route exact path="/signup"
-                render={() => <SignUp />}
-              />
+              <Routes />
             </Switch>
           </main>
         </BrowserRouter>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
-import PrivateRoutes from './PrivateRoutes';
 import CompanyList from '../company/CompanyList';
+import Home from '../Home';
+import Login from '../users/Login';
+import SignUp from '../users/SignUp';
 
 class Routes extends Component {
     render() {
@@ -11,9 +13,16 @@ class Routes extends Component {
                     <Route exact path="/"
                         render={() => <Home />}
                     />
-                    <Route exact path="/companies"
-                        render={() => <CompanyList />}
+                    <Route exact path="/login"
+                        render={() => <Login />}
                     />
+                    <Route exact path="/signup"
+                        render={() => <SignUp />}
+                    />
+                    <Route path="/companies"
+                        render={props => <CompanyList {...props}/>}
+                    />
+
                 </Switch>
             </div>
         )
