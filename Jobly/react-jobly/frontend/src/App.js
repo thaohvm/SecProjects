@@ -3,13 +3,17 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import NavBar from './NavBar';
 import Home from './Home';
-import Login from './users/Login';
-import SignUp from './users/SignUp';
+import Login from './users/LoginForm';
+import SignUp from './users/SignUpForm';
 import Routes from './routes/Routes';
 import CompanyList from './company/CompanyList';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div className='App'>
@@ -17,7 +21,7 @@ class App extends Component {
           <NavBar />
           <main>
             <Switch>
-              <Routes />
+              <Routes render={props => <Route {...props}/>}/>
             </Switch>
           </main>
         </BrowserRouter>

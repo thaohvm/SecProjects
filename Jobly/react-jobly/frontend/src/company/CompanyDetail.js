@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import JoblyApi from '../api';
+import JobCard from '../job/JobCard';
 
 class CompanyDetail extends Component {
     constructor(props) {
@@ -9,10 +10,27 @@ class CompanyDetail extends Component {
         }
     }
 
+    async componentDidMount() {
+        let company = await JoblyApi.getCompany(this.props.match.params.handle);
+        console.log(company)
+        let jobs = [...this.state.company.jobs];
+        console.log(jobs)
+        this.setState({ company });
+    }
+
     render() {
+        let { company } = this.state;
         return (
             <div>
-                {this.state.company.jobs}
+                <h2>{company.name}</h2>
+                <p>{company.description}</p>
+                {company.jobs.map(job =>
+                    <ol><JobCard title={job.title}
+                        salary={job.salary}
+                        equity={job.equity}
+                        companyName={job.companyName}
+                    />
+                    </ol>)}
             </div>
         );
     }
