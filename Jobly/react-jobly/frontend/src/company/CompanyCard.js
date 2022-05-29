@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class CompanyCard extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         let { handle, name, description } = this.props;

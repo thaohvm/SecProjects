@@ -23,6 +23,9 @@ class NavBar extends Component {
             <NavLink exact to="/companies">
               Companies
             </NavLink>
+            <NavLink exact to="/jobs">
+              Jobs
+            </NavLink>
           </Navbar>
         </div>
       );

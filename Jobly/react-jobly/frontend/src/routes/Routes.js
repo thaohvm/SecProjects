@@ -4,6 +4,8 @@ import CompanyList from '../company/CompanyList';
 import Home from '../Home';
 import Login from '../users/Login';
 import SignUp from '../users/SignUp';
+import CompanyDetail from '../company/CompanyDetail';
+import JobList from '../job/JobList';
 
 class Routes extends Component {
     render() {
@@ -20,9 +22,14 @@ class Routes extends Component {
                         render={() => <SignUp />}
                     />
                     <Route path="/companies"
-                        render={props => <CompanyList {...props}/>}
+                        render={props => <CompanyList {...props} />}
                     />
-
+                    <Route path="/companies/:handle"
+                        render={props => <CompanyDetail {...props} />}
+                    />
+                    <Route path="/jobs"
+                        render={props => <JobList {...props} />}
+                    />
                 </Switch>
             </div>
         )
