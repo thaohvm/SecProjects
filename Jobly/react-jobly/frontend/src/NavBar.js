@@ -1,35 +1,63 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import CurrentUserContext from './users/CurrentUserContext';
 import {
-  Navbar,
+    Navbar,
 } from 'reactstrap';
 
 /** Top navigation bar for site. */
 
 class NavBar extends Component {
-    render() {
-      return (
-        <div>
-          <Navbar expand="md">
-            <NavLink exact to="/" className="navbar-brand">
-              Jobly
-            </NavLink>
-            <NavLink exact to="/login">
-              Log in
-            </NavLink>
-            <NavLink exact to="/signup">
-              Sign up
-            </NavLink>
-            <NavLink exact to="/companies">
-              Companies
-            </NavLink>
-            <NavLink exact to="/jobs">
-              Jobs
-            </NavLink>
-          </Navbar>
-        </div>
-      );
+    constructor(props) {
+        super(props);
     }
-  }
 
-  export default NavBar;
+    static contextType = CurrentUserContext;
+
+    render() {
+        const currentUser = this.context;
+        let userLinks = null;
+        if (currentUser) {
+            userLinks = (
+                <div>
+                    <NavLink exact to="/logout">
+                        Log out
+                    </NavLink>
+                </div>
+            )
+        } else {
+            userLinks = (
+                <div>
+                    <NavLink exact to="/login">
+                        Log in
+                    </NavLink>
+                    <NavLink exact to="/signup">
+                        Sign up
+                    </NavLink>
+                </div>
+            )
+        }
+
+        return (
+            <div>
+                <h5>{currentUser}</h5>
+                <Navbar expand="md">
+                    <div>
+                        <NavLink exact to="/" className="navbar-brand">
+                            Jobly
+                        </NavLink>
+                        <NavLink exact to="/companies">
+                            Companies
+                        </NavLink>
+                        <NavLink exact to="/jobs">
+                            Jobs
+                        </NavLink>
+                    </div>
+                    {userLinks}
+                </Navbar>
+            </div>
+        );
+    }
+}
+
+export default NavBar;

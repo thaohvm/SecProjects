@@ -18,17 +18,6 @@ class Routes extends Component {
         this.signUp = this.signUp.bind(this);
     }
 
-    async login(data, history) {
-        try {
-            let token = await JoblyApi.login(data);
-            this.setState({ token: token });
-            history.push("/");
-        } catch (err) {
-            console.error("login failed", err);
-            return { success: false, err }
-        }
-    }
-
     async signUp(data, history) {
         try {
             let token = await JoblyApi.signUp(data);
@@ -40,6 +29,22 @@ class Routes extends Component {
         }
     }
 
+    async login(data, history) {
+        try {
+            let token = await JoblyApi.login(data);
+            this.setState({ token: token });
+            history.push("/");
+        } catch (err) {
+            console.error("login failed", err);
+            return { success: false, err }
+        }
+    }
+
+    logout(history) {
+        // TODO: delete token in local storage
+        history.push("/");
+    }
+
     render() {
         return (
             <div>
@@ -47,11 +52,14 @@ class Routes extends Component {
                     <Route exact path="/"
                         render={() => <Home />}
                     />
-                    <Route exact path="/login"
-                        render={props => <LoginForm handleLogin={this.login} {...props}/>}
-                    />
                     <Route exact path="/signup"
-                        render={props => <SignUpForm handleSignUp={this.signUp} {...props}/>}
+                        render={props => <SignUpForm handleSignUp={this.signUp} {...props} />}
+                    />
+                    <Route exact path="/login"
+                        render={props => <LoginForm handleLogin={this.login} {...props} />}
+                    />
+                    <Route exact path="/logout"
+                        render={props => <LoginForm handleLogin={this.login} {...props} />}
                     />
                     <Route exact path="/companies"
                         render={props => <CompanyList {...props} />}
@@ -62,6 +70,7 @@ class Routes extends Component {
                     <Route path="/jobs"
                         render={props => <JobList {...props} />}
                     />
+                    <Redirect to="/" />
                 </Switch>
             </div>
         )
