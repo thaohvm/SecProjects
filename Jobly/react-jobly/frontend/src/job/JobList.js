@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+
 import JoblyApi from '../api';
 import JobCard from './JobCard';
 import SearchForm from '../common/SearchForm';

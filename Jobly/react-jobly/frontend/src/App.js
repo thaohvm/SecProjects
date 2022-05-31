@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import NavBar from './NavBar';
-import Home from './Home';
-import Login from './users/LoginForm';
-import SignUp from './users/SignUpForm';
 import Routes from './routes/Routes';
-import CompanyList from './company/CompanyList';
 import JoblyApi from './api';
 import { decode } from "jsonwebtoken";
 import CurrentUserContext from './users/CurrentUserContext';
+import PrivateRoute from './routes/PrivateRoute';
 
 class App extends Component {
   constructor(props) {
@@ -21,26 +18,26 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    let currentUser = await this.getCurrentUser();
-    console.log(currentUser);
-    if (currentUser !== undefined) {
-      this.setState({ currentUser: currentUser.username });
+    let userObj = await this.getCurrentUser();
+    console.log(userObj);
+    if (userObj.username !== undefined) {
+      this.setState({ currentUser: userObj.username });
     }
   }
 
   async getCurrentUser() {
     let token = localStorage.getItem("token");
-    console.log(token)
     try {
       let { username } = decode(token);
       let currentUser = await JoblyApi.getUser(username);
-      this.setState({ currentUser: currentUser.username });
+      return currentUser;
     } catch (e) {
       console.error(e);
     }
   }
 
   render() {
+
     return (
       <CurrentUserContext.Provider value={this.state.currentUser}>
         <div className='App'>

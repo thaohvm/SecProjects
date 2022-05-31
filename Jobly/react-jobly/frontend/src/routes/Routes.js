@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import CompanyList from '../company/CompanyList';
 import Home from '../Home';
 import LoginForm from '../users/LoginForm';
@@ -8,6 +8,8 @@ import CompanyDetail from '../company/CompanyDetail';
 import JobList from '../job/JobList';
 import JoblyApi from '../api';
 import PrivateRoute from './PrivateRoute';
+import ProfileForm from '../users/ProfileForm';
+import CurrentUserContext from '../users/CurrentUserContext';
 
 class Routes extends Component {
     constructor(props) {
@@ -72,6 +74,8 @@ class Routes extends Component {
                     <PrivateRoute path="/jobs"
                         render={props => <JobList {...props} />}
                     />
+                    <PrivateRoute path="/profile"
+                        render={props => <ProfileForm {...props} />} />
                     <Redirect to="/" />
                 </Switch>
             </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import CurrentUserContext from './users/CurrentUserContext';
+import ProfileForm from './users/ProfileForm';
 import {
     Navbar,
 } from 'reactstrap';
@@ -31,6 +32,10 @@ class NavBar extends Component {
                     </NavLink>
                     <NavLink exact to="/jobs">
                         Jobs
+                    </NavLink>
+                    <NavLink exact to="/profile"
+                    render={props => <ProfileForm {...props} />}>
+                        Profile
                     </NavLink>
                     <NavLink exact to="/logout" onClick={this.logout}>
                         Log out {currentUser}

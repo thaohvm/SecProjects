@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CurrentUserContext from './users/CurrentUserContext';
-import {
-    Navbar,
-} from 'reactstrap';
+
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     static contextType = CurrentUserContext;
 
@@ -36,25 +31,6 @@ class Home extends Component {
                     <h1>Jobly</h1>
                     <p>All the jobs in one, convenient place.</p>
                     <h5>Welcome Back, {currentUser}</h5>
-                    {/* <Navbar expand="md">
-                        <div>
-                            <NavLink exact to="/" className="navbar-brand">
-                                Jobly
-                            </NavLink>
-                            <NavLink exact to="/companies">
-                                Companies
-                            </NavLink>
-                            <NavLink exact to="/jobs">
-                                Jobs
-                            </NavLink>
-                            <NavLink exact to="/jobs">
-                                Profile
-                            </NavLink>
-                            <NavLink exact to="/logout">
-                                Log out
-                            </NavLink>
-                        </div>
-                    </Navbar> */}
                 </div>
             )
         }

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
-import PrivateRoutes from '../routes/PrivateRoute';
 import CompanyCard from './CompanyCard';
 import JoblyApi from "../api";
 import SearchForm from '../common/SearchForm';

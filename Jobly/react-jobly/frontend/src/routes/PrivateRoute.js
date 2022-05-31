@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import CurrentUserContext from '../users/CurrentUserContext';
 
 class PrivateRoute extends Component {

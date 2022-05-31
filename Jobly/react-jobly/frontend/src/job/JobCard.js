@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 // { jobs: [ { id, title, salary, equity, companyHandle, companyName }, ...] }
 
 class JobCard extends Component {
-    constructor(props) {
-        super(props);
-    }
+
     render() {
         let { title, salary, equity, companyName } = this.props;
 
