@@ -10,9 +10,15 @@ import {
 class NavBar extends Component {
     constructor(props) {
         super(props);
+        this.logout = this.logout.bind(this);
     }
 
     static contextType = CurrentUserContext;
+
+    logout() {
+        localStorage.removeItem("token");
+        document.location.href = "/";
+    }
 
     render() {
         const currentUser = this.context;
@@ -20,8 +26,14 @@ class NavBar extends Component {
         if (currentUser) {
             userLinks = (
                 <div>
-                    <NavLink exact to="/logout">
-                        Log out
+                    <NavLink exact to="/companies">
+                        Companies
+                    </NavLink>
+                    <NavLink exact to="/jobs">
+                        Jobs
+                    </NavLink>
+                    <NavLink exact to="/logout" onClick={this.logout}>
+                        Log out {currentUser}
                     </NavLink>
                 </div>
             )
@@ -40,17 +52,10 @@ class NavBar extends Component {
 
         return (
             <div>
-                <h5>{currentUser}</h5>
                 <Navbar expand="md">
                     <div>
                         <NavLink exact to="/" className="navbar-brand">
                             Jobly
-                        </NavLink>
-                        <NavLink exact to="/companies">
-                            Companies
-                        </NavLink>
-                        <NavLink exact to="/jobs">
-                            Jobs
                         </NavLink>
                     </div>
                     {userLinks}

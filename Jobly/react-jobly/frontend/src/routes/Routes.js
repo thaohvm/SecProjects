@@ -12,37 +12,38 @@ class Routes extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            token: JoblyApi.token
+            token: null
         }
         this.login = this.login.bind(this);
         this.signUp = this.signUp.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
-    async signUp(data, history) {
+    async signUp(data) {
         try {
             let token = await JoblyApi.signUp(data);
-            this.setState({ token: token });
-            history.push("/");
+            localStorage.setItem("token", token);
+            document.location.href = "/";
         } catch (err) {
             console.error("signUp failed", err);
             return { success: false, err }
         }
     }
 
-    async login(data, history) {
+    async login(data) {
         try {
             let token = await JoblyApi.login(data);
-            this.setState({ token: token });
-            history.push("/");
+            localStorage.setItem("token", token);
+            document.location.href = "/";
         } catch (err) {
             console.error("login failed", err);
             return { success: false, err }
         }
     }
 
-    logout(history) {
-        // TODO: delete token in local storage
-        history.push("/");
+    logout() {
+        localStorage.removeItem("token");
+        document.location.href = "/";
     }
 
     render() {
@@ -58,8 +59,8 @@ class Routes extends Component {
                     <Route exact path="/login"
                         render={props => <LoginForm handleLogin={this.login} {...props} />}
                     />
-                    <Route exact path="/logout"
-                        render={props => <LoginForm handleLogin={this.login} {...props} />}
+                    <Route path="/logout"
+                        onClick={this.logout}
                     />
                     <Route exact path="/companies"
                         render={props => <CompanyList {...props} />}

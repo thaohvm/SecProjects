@@ -11,13 +11,13 @@ import JoblyApi from './api';
 import { decode } from "jsonwebtoken";
 import CurrentUserContext from './users/CurrentUserContext';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentUser: null,
     }
+    this.getCurrentUser = this.getCurrentUser.bind(this);
   }
 
   async componentDidMount() {
@@ -29,11 +29,12 @@ class App extends Component {
   }
 
   async getCurrentUser() {
+    let token = localStorage.getItem("token");
+    console.log(token)
     try {
-      // TODO: get token from local storage
-      let token = JoblyApi.token;
       let { username } = decode(token);
-      return await JoblyApi.getUser(username);
+      let currentUser = await JoblyApi.getUser(username);
+      this.setState({ currentUser: currentUser.username });
     } catch (e) {
       console.error(e);
     }
