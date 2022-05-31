@@ -7,6 +7,7 @@ import SignUpForm from '../users/SignUpForm';
 import CompanyDetail from '../company/CompanyDetail';
 import JobList from '../job/JobList';
 import JoblyApi from '../api';
+import PrivateRoute from './PrivateRoute';
 
 class Routes extends Component {
     constructor(props) {
@@ -59,16 +60,16 @@ class Routes extends Component {
                     <Route exact path="/login"
                         render={props => <LoginForm handleLogin={this.login} {...props} />}
                     />
-                    <Route path="/logout"
+                    <PrivateRoute path="/logout"
                         onClick={this.logout}
                     />
-                    <Route exact path="/companies"
+                    <PrivateRoute exact path="/companies"
                         render={props => <CompanyList {...props} />}
                     />
-                    <Route exact path="/companies/:handle"
+                    <PrivateRoute exact path="/companies/:handle"
                         render={props => <CompanyDetail {...props} />}
                     />
-                    <Route path="/jobs"
+                    <PrivateRoute path="/jobs"
                         render={props => <JobList {...props} />}
                     />
                     <Redirect to="/" />
