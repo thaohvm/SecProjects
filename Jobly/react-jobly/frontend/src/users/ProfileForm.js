@@ -42,7 +42,6 @@ class ProfileForm extends Component {
     }
 
     render() {
-
         return (
             <div className='ProfileForm'>
                 <h1>Profile</h1>

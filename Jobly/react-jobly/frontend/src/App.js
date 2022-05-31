@@ -18,16 +18,16 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    let userObj = await this.getCurrentUser();
-    console.log(userObj);
-    if (userObj.username !== undefined) {
-      this.setState({ currentUser: userObj.username });
+    let currentUser = await this.getCurrentUser();
+    console.log(currentUser);
+    if (currentUser !== undefined) {
+      this.setState({ currentUser: currentUser.username });
     }
   }
 
   async getCurrentUser() {
-    let token = localStorage.getItem("token");
     try {
+      let token = localStorage.getItem("token");
       let { username } = decode(token);
       let currentUser = await JoblyApi.getUser(username);
       return currentUser;
