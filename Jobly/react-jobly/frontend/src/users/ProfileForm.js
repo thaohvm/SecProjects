@@ -28,8 +28,8 @@ class ProfileForm extends Component {
         e.preventDefault();
         try {
             let data = {
-                firstName: this.state.firstName || undefined,
-                lastName: this.state.lastName || undefined,
+                firstName: this.state.first_name || undefined,
+                lastName: this.state.last_name || undefined,
                 email: this.state.email || undefined,
                 password: this.state.password
             }
