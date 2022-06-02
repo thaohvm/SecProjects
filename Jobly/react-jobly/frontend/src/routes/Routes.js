@@ -14,7 +14,7 @@ import CurrentUserContext from '../users/CurrentUserContext';
 class Routes extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+                this.state = {
             token: null
         }
         this.login = this.login.bind(this);
@@ -75,7 +75,7 @@ class Routes extends Component {
                         render={props => <JobList {...props} />}
                     />
                     <PrivateRoute path="/profile"
-                        render={props => <ProfileForm {...props} />} />
+                    render={props => <ProfileForm {...props} />} />
                     <Redirect to="/" />
                 </Switch>
             </div>
