@@ -30,9 +30,9 @@ class JobList extends Component {
     }
 
     async applyJob(jobId) {
-        let currentUser = this.context.currentUser;
+        let currentUser = this.context;
         await JoblyApi.applyToJob(currentUser, jobId);
-        this.context.addAppliedJob(jobId);
+
     }
 
     render() {
@@ -49,7 +49,6 @@ class JobList extends Component {
                         title={job.title}
                         salary={job.salary}
                         equity={job.equity}
-                        applied={this.context.appliedJobs.includes(job.id)}
                         applyJob={this.applyJob}
                     />
                 ))}

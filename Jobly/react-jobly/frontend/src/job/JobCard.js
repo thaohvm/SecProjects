@@ -7,8 +7,8 @@ class JobCard extends Component {
         super(props);
         console.log(props);
         this.state = {
-            applied: props.applied,
-            disable: props.applied,
+            applied: false,
+            disable: false
         }
         this.handleApply = this.handleApply.bind(this);
     }
@@ -27,7 +27,7 @@ class JobCard extends Component {
     }
 
     render() {
-        let { title, salary, equity, companyName } = this.props;
+        let { title, companyName, salary, equity } = this.props;
 
         return (
             <div>

@@ -23,7 +23,7 @@ class NavBar extends Component {
     }
 
     render() {
-        const currentUser = this.context.currentUser;
+        const currentUser = this.context;
         if (currentUser) {
             return (
                 <Navbar bg="light" expand="lg">
