@@ -9,27 +9,33 @@ class CompanyDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            company: { jobs: [] }
+            company: { jobs: [] },
+            appliedJobs: [],
+            currentUser: null
         }
         this.applyJob = this.applyJob.bind(this);
     }
 
     async componentDidMount() {
+        let { currentUser, appliedJobs } = this.context;
         let company = await JoblyApi.getCompany(this.props.match.params.handle);
         console.log(company)
         let jobs = [...this.state.company.jobs];
-        console.log(jobs)
-        this.setState({ company });
+        this.setState({ company, appliedJobs, currentUser });
     }
 
     async applyJob(jobId) {
-        let currentUser = this.context;
-        await JoblyApi.applyToJob(currentUser, jobId);
-
+        let { currentUser } = this.state;
+        let application = await JoblyApi.applyToJob(currentUser, jobId);
+        this.setState((st) => ({
+            jobs: st.jobs.map((job) =>
+                job.id === jobId ? { ...job, status: application } : job
+            ),
+        }));
     }
 
     render() {
-        let { company } = this.state;
+        let { company, appliedJobs } = this.state;
         return (
             <div>
                 <h2>{company.name}</h2>
@@ -41,7 +47,9 @@ class CompanyDetail extends Component {
                         title={job.title}
                         salary={job.salary}
                         equity={job.equity}
+                        status={job.status}
                         applyJob={this.applyJob}
+                        applied={appliedJobs.indexOf(job.id) > -1 ? true : false}
                     />
                     </ol>)}
             </div>

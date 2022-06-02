@@ -4,15 +4,18 @@ import JoblyApi from "../api";
 import SearchForm from '../common/SearchForm';
 
 class CompanyList extends Component {
+
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
-            companies: []
+            companies: [],
         }
         this.search = this.search.bind(this);
     }
 
     async componentDidMount() {
+
         let companies = await JoblyApi.getCompanies();
         console.log(companies);
         this.setState({ companies });
@@ -41,4 +44,5 @@ class CompanyList extends Component {
         )
     }
 }
+
 export default CompanyList;

@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import CurrentUserContext from './users/CurrentUserContext';
-import ProfileForm from './users/ProfileForm';
-import './NavBar.css';
-import {
-    Nav, Navbar, NavbarBrand,
-} from 'reactstrap';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import CurrentUserContext from "./users/CurrentUserContext";
+import ProfileForm from "./users/ProfileForm";
+import "./NavBar.css";
+import { Nav, Navbar, NavbarBrand } from "reactstrap";
 
 /** Top navigation bar for site. */
 
@@ -14,7 +12,6 @@ class NavBar extends Component {
         super(props);
         this.logout = this.logout.bind(this);
     }
-
     static contextType = CurrentUserContext;
 
     logout() {
@@ -23,7 +20,8 @@ class NavBar extends Component {
     }
 
     render() {
-        const currentUser = this.context;
+        const { currentUser } = this.context;
+        console.log({ currentUser });
         if (currentUser) {
             return (
                 <Navbar bg="light" expand="lg">
@@ -34,22 +32,28 @@ class NavBar extends Component {
                         <NavLink exact to="/companies" className="navbar">
                             Companies
                         </NavLink>
-
                         <NavLink exact to="/jobs" className="navbar">
                             Jobs
                         </NavLink>
-
-                        <NavLink exact to="/profile" className="navbar"
-                            render={props => <ProfileForm {...props} />}>
+                        <NavLink
+                            exact
+                            to="/profile"
+                            className="navbar"
+                            render={(props) => <ProfileForm {...props} />}
+                        >
                             Profile
                         </NavLink>
-
-                        <NavLink exact to="/logout" className="navbar" onClick={this.logout}>
+                        <NavLink
+                            exact
+                            to="/logout"
+                            className="navbar"
+                            onClick={this.logout}
+                        >
                             Log out "{currentUser}"
                         </NavLink>
                     </Nav>
                 </Navbar>
-            )
+            );
         } else {
             return (
                 <Navbar bg="light" expand="lg">
@@ -66,7 +70,7 @@ class NavBar extends Component {
                         </NavLink>
                     </Nav>
                 </Navbar>
-            )
+            );
         }
     }
 }
