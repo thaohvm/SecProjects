@@ -82,6 +82,23 @@ class JoblyApi {
     let res = await this.request(`users/${username}`, data, "patch");
     return res.user;
   }
+
+  /** Apply for job: update db, returns undefined.
+ *
+ * - username: username applying for job
+ * - jobId: job id
+ **/
+
+  /** POST /[username]/jobs/[id]  { state } => { application }
+*
+* Returns {"applied": jobId}
+*
+* Authorization required: admin or same-user-as-:username
+* */
+
+  static async applyToJob(username, jobId) {
+    await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
+  }
 }
 
 // for now, put token ("testuser" / "password" on class)

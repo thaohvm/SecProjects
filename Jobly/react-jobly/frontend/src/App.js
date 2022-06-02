@@ -11,9 +11,17 @@ import PrivateRoute from './routes/PrivateRoute';
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.addAppliedJob = (jobId) => {
+      this.setState({ appliedJobs: [...this.state.appliedJobs, jobId] });
+    }
+
     this.state = {
       currentUser: null,
+      appliedJobs: [],
+      addAppliedJob: this.addAppliedJob,
     }
+
     this.getCurrentUser = this.getCurrentUser.bind(this);
   }
 
@@ -37,10 +45,11 @@ class App extends Component {
   }
 
   render() {
+    let background = this.state.currentUser ? "" : "https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80";
 
     return (
-      <CurrentUserContext.Provider value={this.state.currentUser}>
-        <div className='App'>
+      <CurrentUserContext.Provider value={this.state}>
+        <div className='App' style={{ background: `url(${background})`}}>
           <BrowserRouter>
             <NavBar />
             <main>

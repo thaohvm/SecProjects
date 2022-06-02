@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import JoblyApi from '../api';
 import JobCard from '../job/JobCard';
+import CurrentUserContext from '../users/CurrentUserContext';
 
 class CompanyDetail extends Component {
+    static contextType = CurrentUserContext;
+
     constructor(props) {
         super(props);
         this.state = {
             company: { jobs: [] }
         }
+        this.applyJob = this.applyJob.bind(this);
     }
 
     async componentDidMount() {
@@ -18,6 +22,12 @@ class CompanyDetail extends Component {
         this.setState({ company });
     }
 
+    async applyJob(jobId) {
+        let currentUser = this.context.currentUser;
+        await JoblyApi.applyToJob(currentUser, jobId);
+        this.context.addAppliedJob(jobId);
+    }
+
     render() {
         let { company } = this.state;
         return (
@@ -25,10 +35,14 @@ class CompanyDetail extends Component {
                 <h2>{company.name}</h2>
                 <p>{company.description}</p>
                 {company.jobs.map(job =>
-                    <ol><JobCard title={job.title}
+                    <ol><JobCard
+                        id={job.id}
+                        companyName={job.companyName}
+                        title={job.title}
                         salary={job.salary}
                         equity={job.equity}
-                        companyName={job.companyName}
+                        applied={this.context.appliedJobs.includes(job.id)}
+                        applyJob={this.applyJob}
                     />
                     </ol>)}
             </div>

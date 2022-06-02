@@ -8,7 +8,7 @@ class Home extends Component {
     static contextType = CurrentUserContext;
 
     render() {
-        const currentUser = this.context;
+        const currentUser = this.context.currentUser;
         let homeContent = (
             <div>
                 <h1>Jobly</h1>
